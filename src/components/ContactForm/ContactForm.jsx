@@ -4,14 +4,16 @@ import css from "./ContactForm.module.css";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import * as yup from "yup";
 import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 
-const ContactForm = ({ onAdd }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const nameId = nanoid();
   const numberId = nanoid();
 
-  const handleSubmit = (values, actions) => {
-    onAdd({ id: nanoid(), name: values.name, number: values.number });
-    console.log(values);
+  const handleSubmit = (value, actions) => {
+    dispatch(addContact(value));
     actions.resetForm();
   };
 
